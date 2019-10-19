@@ -15,7 +15,7 @@ url = 0 #Just Creating the var
 count = 0 # Knowing the amounts of run
 
 def again(url, page_soup, count):
-    for url in range(950):
+    for url in range(950): #Amount of chapters
         print("Contador: ")
         print(count)
         count = count + 1
