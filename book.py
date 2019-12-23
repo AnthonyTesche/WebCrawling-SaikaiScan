@@ -1,14 +1,14 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-# Imports and Var creations
+# Imports
 
 #url for reference
 my_url = 'https://saikaiscan.com.br/novels/ascensao-de-um-deus-aud/post/capitulo-83-o-inicio-do-torneio/4722'
 
+print("BS4 Working!!!")
 uClient = uReq(my_url)
 page_html = uClient.read()
 uClient.close()
-print("Download, Read & Close - Start")
 
 page_soup = soup(page_html, "html.parser")
 url = 0 #Just Creating the var
@@ -27,6 +27,7 @@ def again(url, page_soup):
 
         page_soup = soup(page_html, "html.parser")
         Cap = page_soup.body.h2.text.strip().replace("?", "") # Get the Chapter and clear the special chars(win archives restrictions)
+        Cap = Cap.replace("!", "")
         print("Leitura do " + Cap)
 
         #gets all the <p> whit 
@@ -47,7 +48,11 @@ def again(url, page_soup):
                 again(url, page_soup)
 
             textCorrect = textPar[i].text.replace(".", ". ") #correction for the text
-            f.write(textCorrect + "\n")#every <p> need a \n
+            if textCorrect == "":
+                f.write("\n")
+            else:
+                f.write(textCorrect + "\n")#every <p> need a \n
+                print(textCorrect)
             i = i + 1 #Vector position
 
     f.close()
