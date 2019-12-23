@@ -1,9 +1,11 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
+from pathlib import Path
+import re
 # Imports
 
 #url for reference
-my_url = 'https://saikaiscan.com.br/novels/ascensao-de-um-deus-aud/post/capitulo-83-o-inicio-do-torneio/4722'
+my_url = 'https://saikaiscan.com.br/novels/ascensao-de-um-deus-aud/post/capitulo-82-preparacao-para-o-torneio/4721'
 
 print("BS4 Working!!!")
 uClient = uReq(my_url)
@@ -12,10 +14,11 @@ uClient.close()
 
 page_soup = soup(page_html, "html.parser")
 url = 0 #Just Creating the var
+count = 0
+def again(url, page_soup, count):
 
-def again(url, page_soup):
     for url in range(950): #Amount of chapters
-
+        count = count + 1
         # locates the next page and create the url
         url = page_soup.find("a", {"class":"next"})["href"]
         my_url = 'https://saikaiscan.com.br' + url
@@ -32,7 +35,8 @@ def again(url, page_soup):
 
         #gets all the <p> whit 
         textPar = page_soup.findAll("p")
-
+        Cap = Cap.split()
+        Cap = Cap[0] + " " + Cap[1]
         out_filename = Cap + ".txt"
         f = open(out_filename, "w", encoding='utf-8')
         f.write(Cap + "\n")
@@ -45,7 +49,7 @@ def again(url, page_soup):
         # While for write all the <p>
         while (i <= a):
             if (i == len(textPar)): #if textPar reaches hes maximum vector go next page
-                again(url, page_soup)
+                again(url, page_soup, count)
 
             textCorrect = textPar[i].text.replace(".", ". ") #correction for the text
             if textCorrect == "":
@@ -54,7 +58,14 @@ def again(url, page_soup):
                 f.write(textCorrect + "\n")#every <p> need a \n
                 print(textCorrect)
             i = i + 1 #Vector position
+    path = Path('Pasta')
+    for out_filename in path.glob('*'):
+        correct = out_filename.suffix
+    if correct != ".txt":
+        print("Erro no arquivo do " + Cap)
+        print("Executando contramedida")
 
-    f.close()
-    print("Fecha Arquivo")
-again(url, page_soup)
+    else:
+        f.close()
+        print("Fecha Arquivo")
+again(url, page_soup, count)

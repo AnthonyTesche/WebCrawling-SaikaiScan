@@ -17,4 +17,4 @@
 - If encounter this error "ImportError: No module named bs4 in Windows" use the ""pip install BeautifulSoup4"".
 
 ## Bugs (Working in Fix)
-- Some chapters dont generate the .txt but the bs4 catch the `<p>`(Paragraph) and generate a blank archive with no extension.
+- Unknow Bugs for now
