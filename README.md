@@ -1,11 +1,8 @@
-# WebScraping-SaikaiScan
+# WebCrawling-SaikaiScan
 - Author: Anthony Tesche
 
-## Version - 0.1.0
-- Some corrections in apresentation
-
 ## Description
-- Want to read any novel hosted on Saikai Scan? Use this "Software" to download in .txt all the Chapters.
+- I made this code for studying python and how a Web Scraping/Crawling works.
 
 ## How to use
 - Find the var "my_url" and change for the url of your first chapter novel
@@ -17,4 +14,7 @@
 - If encounter this error "ImportError: No module named bs4 in Windows" use the ""pip install BeautifulSoup4"".
 
 ## Bugs (Working in Fix)
-- Unknow Bugs for now
+- Unknow Bugs i think, for now
+
+## Version - 0.1.0
+- Some corrections in apresentation
