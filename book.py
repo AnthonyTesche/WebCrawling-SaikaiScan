@@ -35,9 +35,9 @@ def again(url, page_soup, count):
 
         #gets all the <p> whit 
         textPar = page_soup.findAll("p")
-        Cap = Cap.split()
-        Cap = Cap[0] + " " + Cap[1]
-        out_filename = Cap + ".txt"
+        archiveName = Cap.split()
+        archiveName = archiveName[0] + " " + archiveName[1]
+        out_filename = archiveName + ".txt"
         f = open(out_filename, "w", encoding='utf-8')
         f.write(Cap + "\n")
         print("Arquivo do " + Cap + " criado")
@@ -63,7 +63,7 @@ def again(url, page_soup, count):
         correct = out_filename.suffix
     if correct != ".txt":
         print("Erro no arquivo do " + Cap)
-        print("Executando contramedida")
+        exit()
 
     else:
         f.close()
