@@ -2,7 +2,28 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 from pathlib import Path
 import re
+import mysql.connector
 # Imports
+
+db = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd=""
+)
+dbexec = db.cursor()
+
+def query(data)
+    dbexec.execute(data)
+
+try
+    query("CREATE DATABASE book;")
+except:
+    print("DB ja criado ou algum outro erro!")
+
+try
+    query("CREATE TABLE aud(capitulo char(50) primary key not null, texto mediumtext not null)default character set = utf8;")
+except:
+    print("Tabela ja criada ou algum outro erro!")
 
 #url for reference
 my_url = 'https://saikaiscan.com.br/novels/ascensao-de-um-deus-aud/post/capitulo-82-preparacao-para-o-torneio/4721'
@@ -52,6 +73,7 @@ def again(url, page_soup, count):
                 again(url, page_soup, count)
 
             textCorrect = textPar[i].text.replace(".", ". ") #correction for the text
+            fullText += textCorrect + "\n"
             if textCorrect == "":
                 f.write("\n")
             else:
@@ -68,4 +90,6 @@ def again(url, page_soup, count):
     else:
         f.close()
         print("Fecha Arquivo")
+    
+    query("INSERT INTO aud(capitulo, text) VALUES (" + Cap + ", "+ fullText +");")
 again(url, page_soup, count)
