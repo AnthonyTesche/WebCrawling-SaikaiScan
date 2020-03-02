@@ -5,7 +5,7 @@ import re
 # Imports
 
 #url for reference
-my_url = 'https://saikaiscan.com.br/novels/ascensao-de-um-deus-aud/post/capitulo-82-preparacao-para-o-torneio/4721'
+my_url = 'https://saikaiscan.com.br/novels/ascensao-de-um-deus-aud/post/capitulo-01-lixo/4450'
 
 print("BS4 Working!!!")
 uClient = uReq(my_url)
@@ -37,8 +37,9 @@ def again(url, page_soup, count):
         textPar = page_soup.findAll("p")
         archiveName = Cap.split()
         archiveName = archiveName[0] + " " + archiveName[1]
-        out_filename = archiveName + ".txt"
-        f = open(out_filename, "w", encoding='utf-8')
+        out_filename = "AUD.txt"
+        #out_filename = archiveName + ".txt"
+        f = open(out_filename, "a", encoding='utf-8')
         f.write(Cap + "\n")
         print("Arquivo do " + Cap + " criado")
 
@@ -56,7 +57,6 @@ def again(url, page_soup, count):
                 f.write("\n")
             else:
                 f.write(textCorrect + "\n")#every <p> need a \n
-                print(textCorrect)
             i = i + 1 #Vector position
     path = Path('Pasta')
     for out_filename in path.glob('*'):
